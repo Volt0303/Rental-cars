@@ -54,17 +54,31 @@ const MINOR_HOURS = [3, 9, 15, 21];
 
 type TooltipState = { bar: ScheduleBar; x: number; y: number } | null;
 
+export type GanttVehicleRow = {
+  id: string;
+  name: string;
+  plate: string;
+  status: string;
+};
+
 export function ScheduleGantt({
   onSelect,
   selectedBarId,
   showStatusBadge = false,
+  vehicles: vehiclesProp,
+  bars: barsProp,
 }: {
   onSelect?: (barId: string) => void;
   selectedBarId?: string;
   showStatusBadge?: boolean;
+  vehicles?: GanttVehicleRow[];
+  bars?: ScheduleBar[];
 }) {
   const { t } = useI18n();
   const [tooltip, setTooltip] = useState<TooltipState>(null);
+
+  const vehicleList: GanttVehicleRow[] = vehiclesProp ?? [...SCHEDULE_VEHICLES];
+  const allBars: ScheduleBar[] = barsProp ?? SCHEDULE_BARS;
 
   const showTip = (bar: ScheduleBar, e: React.MouseEvent<HTMLButtonElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -141,8 +155,8 @@ export function ScheduleGantt({
           </div>
 
           {/* ── Vehicle rows ── */}
-          {SCHEDULE_VEHICLES.map((v) => {
-            const bars = SCHEDULE_BARS.filter((b) => b.vehicleId === v.id);
+          {vehicleList.map((v) => {
+            const bars = allBars.filter((b) => b.vehicleId === v.id);
             return (
               <div key={v.id} className="flex h-[60px] border-b border-slate-100 last:border-0">
 
@@ -183,7 +197,7 @@ export function ScheduleGantt({
                   </div>
 
                   {/* Hour sub-grid lines (6h, 12h, 18h marks aligned with ruler) */}
-                  {SCHEDULE_VEHICLES.length > 0 && WEEK_DAYS.map((_, di) => (
+                  {vehicleList.length > 0 && WEEK_DAYS.map((_, di) => (
                     [6, 12, 18].map((h) => {
                       const pct = ((di + h / 24) / 7) * 100;
                       return (

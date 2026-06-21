@@ -159,12 +159,16 @@ export type ScheduleBar = {
 };
 
 export const SCHEDULE_VEHICLES = [
-  { id: "alphard", name: "Toyota Alphard", plate: "品川 300 わ 12-34", status: "available" },
-  { id: "hiace", name: "Toyota Hiace", plate: "品川 400 わ 56-78", status: "inUse" },
-  { id: "serena", name: "Nissan Serena", plate: "品川 500 わ 90-12", status: "available" },
-  { id: "vclass", name: "Mercedes-Benz V-Class", plate: "品川 330 わ 33-44", status: "maintenance" },
-  { id: "modely", name: "Tesla Model Y", plate: "品川 301 わ 77-88", status: "available" },
-  { id: "prado", name: "Land Cruiser Prado", plate: "品川 302 わ 11-22", status: "maintenance" },
+  { id: "alphard", name: "Toyota Alphard",       plate: "品川 300 わ 12-34", status: "available",   store: "成田空港店", category: "luxury"  },
+  { id: "hiace",   name: "Toyota Hiace",          plate: "品川 400 わ 56-78", status: "inUse",       store: "羽田空港店", category: "minivan" },
+  { id: "serena",  name: "Nissan Serena",          plate: "品川 500 わ 90-12", status: "available",   store: "新宿店",     category: "minivan" },
+  { id: "vclass",  name: "Mercedes-Benz V-Class", plate: "品川 330 わ 33-44", status: "maintenance", store: "渋谷店",     category: "luxury"  },
+  { id: "modely",  name: "Tesla Model Y",          plate: "品川 301 わ 77-88", status: "available",   store: "横浜店",     category: "suv"     },
+  { id: "prado",   name: "Land Cruiser Prado",     plate: "品川 302 わ 11-22", status: "maintenance", store: "大阪店",     category: "suv"     },
+] as const;
+
+export const SCHEDULE_STORES = [
+  "成田空港店", "羽田空港店", "新宿店", "渋谷店", "横浜店", "大阪店",
 ] as const;
 
 export const WEEK_DAYS = [
