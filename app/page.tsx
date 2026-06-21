@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Globe, LayoutDashboard, ArrowRight, Car } from "lucide-react";
+import { LayoutDashboard, ArrowRight, Car } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { CompassCarLogo } from "@/components/CompassCarLogo";
@@ -20,15 +20,10 @@ export default function LandingPage() {
 
       <main className="mx-auto max-w-6xl px-5 pb-20 pt-10 sm:pt-20">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-bold text-slate-200 ring-1 ring-white/15">
-            <Globe className="h-3.5 w-3.5" /> {t("landing.badge")} · COMPASS_CAR
-          </span>
           <h1 className="mt-6 text-3xl font-extrabold leading-tight sm:text-5xl">
             {t("landing.title")}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
-            {t("landing.subtitle")}
-          </p>
+
         </div>
 
         <div className="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-2">
@@ -61,9 +56,7 @@ export default function LandingPage() {
           </Link>
         </div>
 
-        <p className="mx-auto mt-12 max-w-xl text-center text-xs text-slate-400">
-          {t("landing.note")}
-        </p>
+
       </main>
     </div>
   );

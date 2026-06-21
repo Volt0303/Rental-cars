@@ -473,6 +473,22 @@ export default function SearchPage() {
           <p className="text-sm text-slate-500">{t("search.subtitle")}</p>
         </div>
 
+        {/* ── Results toolbar — full width, above the grid ── */}
+        <div className="mb-4 flex items-center justify-between">
+          <p className="text-sm text-slate-600">
+            <span className="font-bold text-slate-800">{t("search.results")}: </span>
+            <span className="font-extrabold text-brand-600">{filtered.length}</span>{" "}
+            {t("search.found")}
+          </p>
+          <div className="flex items-center gap-2 text-sm">
+            <span className="hidden text-slate-400 sm:inline">{t("search.sort")}:</span>
+            <button className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 font-medium text-slate-600 ring-1 ring-slate-200">
+              {t("search.sortRecommended")}
+              <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+          </div>
+        </div>
+
         <div className="grid gap-6 lg:grid-cols-[260px_1fr] xl:grid-cols-[260px_1fr_300px]">
 
           {/* ── Filter sidebar ── */}
@@ -548,21 +564,6 @@ export default function SearchPage() {
 
           {/* ── Results column ── */}
           <div>
-            <div className="mb-4 flex items-center justify-between">
-              <p className="text-sm text-slate-600">
-                <span className="font-bold text-slate-800">{t("search.results")}: </span>
-                <span className="font-extrabold text-brand-600">{filtered.length}</span>{" "}
-                {t("search.found")}
-              </p>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="hidden text-slate-400 sm:inline">{t("search.sort")}:</span>
-                <button className="inline-flex items-center gap-1.5 rounded-lg bg-white px-3 py-1.5 font-medium text-slate-600 ring-1 ring-slate-200">
-                  {t("search.sortRecommended")}
-                  <ChevronDown className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            </div>
-
             {isLoading ? (
               <SkeletonList />
             ) : filtered.length === 0 ? (
