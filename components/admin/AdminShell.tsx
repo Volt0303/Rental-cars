@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { CompassCarLogo } from "@/components/CompassCarLogo";
 import { cn } from "@/lib/utils";
 
 const NAV = [
@@ -51,18 +52,8 @@ export function AdminShell({
     <div className="flex min-h-screen bg-[#f4f7fe]">
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col bg-navy-900 text-slate-300 lg:flex">
-        <div className="flex h-16 items-center gap-2.5 px-5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white">
-            <Car className="h-5 w-5" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-base font-extrabold text-white">
-              Rentacar Pro
-            </span>
-            <span className="block text-[10px] text-slate-400">
-              {t("brand.tagline.admin")}
-            </span>
-          </span>
+        <div className="flex h-16 items-center px-4">
+          <CompassCarLogo />
         </div>
 
         <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-3 scrollbar-thin">
@@ -92,7 +83,7 @@ export function AdminShell({
 
         <div className="border-t border-white/10 px-3 py-3">
           <Link
-            href="/search"
+            href="/"
             className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-400 hover:bg-white/5 hover:text-white"
           >
             <ExternalLink className="h-[18px] w-[18px]" />

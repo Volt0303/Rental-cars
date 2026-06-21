@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Car, Globe, LayoutDashboard, ArrowRight } from "lucide-react";
+import { Globe, LayoutDashboard, ArrowRight, Car } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { CompassCarLogo } from "@/components/CompassCarLogo";
 
 export default function LandingPage() {
   const { t } = useI18n();
@@ -11,12 +12,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-navy-900 text-white">
       <header className="mx-auto flex h-16 max-w-6xl items-center px-5">
-        <div className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
-            <Car className="h-5 w-5" />
-          </span>
-          <span className="text-lg font-extrabold">Rentacar Pro</span>
-        </div>
+        <CompassCarLogo />
         <div className="ml-auto">
           <LanguageSwitcher dark />
         </div>

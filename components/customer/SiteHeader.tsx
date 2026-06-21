@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { Car, User, ChevronDown } from "lucide-react";
+import { User, ChevronDown } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { CompassCarLogo } from "@/components/CompassCarLogo";
 
 const NAV: { key: string; href: string }[] = [
   { key: "cnav.home", href: "/" },
@@ -19,16 +20,8 @@ export function SiteHeader({ active = "cnav.vehicles" }: { active?: string }) {
   return (
     <header className="sticky top-0 z-40 bg-navy-900 text-white">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-5">
-        <Link href="/search" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
-            <Car className="h-5 w-5" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-lg font-extrabold">Rentacar Pro</span>
-            <span className="block text-[10px] tracking-wide text-slate-300">
-              {t("brand.tagline.site")}
-            </span>
-          </span>
+        <Link href="/">
+          <CompassCarLogo />
         </Link>
 
         <nav className="ml-4 hidden items-center gap-1 lg:flex">
