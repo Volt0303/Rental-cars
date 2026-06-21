@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   MapPin,
@@ -182,6 +182,15 @@ function Pagination({
   total: number;
   onChange: (p: number) => void;
 }) {
+  const [input, setInput] = useState(String(page));
+  const [error, setError] = useState(false);
+
+  // Keep input in sync when page changes via prev/next/page-button clicks
+  useEffect(() => {
+    setInput(String(page));
+    setError(false);
+  }, [page]);
+
   if (total <= 1) return null;
 
   const getPages = (): (number | "…")[] => {
@@ -196,44 +205,93 @@ function Pagination({
     return pages;
   };
 
+  const commit = () => {
+    const n = parseInt(input, 10);
+    if (!isNaN(n) && n >= 1 && n <= total) {
+      onChange(n);
+      // input is reset by the useEffect that fires when `page` changes
+    } else {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+        setInput(String(page)); // revert to current page on invalid entry
+      }, 1200);
+    }
+  };
+
   return (
-    <div className="mt-6 flex items-center justify-center gap-1">
-      <button
-        onClick={() => onChange(page - 1)}
-        disabled={page === 1}
-        className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 ring-1 ring-slate-200 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-30"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </button>
+    <div className="mt-6 space-y-3">
+      {/* Page buttons row */}
+      <div className="flex items-center justify-center gap-1">
+        <button
+          onClick={() => onChange(page - 1)}
+          disabled={page === 1}
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 ring-1 ring-slate-200 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-30"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </button>
 
-      {getPages().map((p, i) =>
-        p === "…" ? (
-          <span key={`e${i}`} className="flex h-9 w-9 items-center justify-center text-sm text-slate-400">
-            …
-          </span>
-        ) : (
-          <button
-            key={p}
-            onClick={() => onChange(p as number)}
-            className={cn(
-              "flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium transition-colors",
-              p === page
-                ? "bg-brand-600 text-white shadow-sm"
-                : "text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
-            )}
-          >
-            {p}
-          </button>
-        )
-      )}
+        {getPages().map((p, i) =>
+          p === "…" ? (
+            <span key={`e${i}`} className="flex h-9 w-9 items-center justify-center text-sm text-slate-400">
+              …
+            </span>
+          ) : (
+            <button
+              key={p}
+              onClick={() => onChange(p as number)}
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium transition-colors",
+                p === page
+                  ? "bg-brand-600 text-white shadow-sm"
+                  : "text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+              )}
+            >
+              {p}
+            </button>
+          )
+        )}
 
-      <button
-        onClick={() => onChange(page + 1)}
-        disabled={page === total}
-        className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 ring-1 ring-slate-200 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-30"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
+        <button
+          onClick={() => onChange(page + 1)}
+          disabled={page === total}
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-400 ring-1 ring-slate-200 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-30"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </div>
+
+      {/* Jump-to-page row */}
+      <div className="flex items-center justify-center gap-2 text-sm">
+        <span className="text-slate-400">ページへ移動:</span>
+        <input
+          type="text"
+          inputMode="numeric"
+          value={input}
+          onChange={(e) => {
+            setError(false);
+            setInput(e.target.value.replace(/[^0-9]/g, ""));
+          }}
+          onKeyDown={(e) => e.key === "Enter" && commit()}
+          onFocus={(e) => e.target.select()}
+          className={cn(
+            "w-14 rounded-lg px-2 py-1.5 text-center text-sm font-medium outline-none ring-1 transition-colors",
+            error
+              ? "ring-rose-400 bg-rose-50 text-rose-600"
+              : "ring-slate-200 bg-slate-50 text-slate-700 focus:ring-brand-400"
+          )}
+        />
+        <span className="text-slate-400">/ {total}</span>
+        <button
+          onClick={commit}
+          className="rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-200 active:bg-slate-300 transition-colors"
+        >
+          移動
+        </button>
+        {error && (
+          <span className="text-xs text-rose-500">1〜{total} を入力してください</span>
+        )}
+      </div>
     </div>
   );
 }
@@ -338,8 +396,6 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 
 export default function SearchPage() {
   const { t } = useI18n();
-  const topRef = useRef<HTMLDivElement>(null);
-
   // filter form state
   const [store,      setStore]      = useState("成田空港店");
   const [pickupDate, setPickupDate] = useState("2024-06-15");
@@ -378,7 +434,7 @@ export default function SearchPage() {
 
   const goToPage = (p: number) => {
     setPage(p);
-    topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Deterministic per-vehicle date availability:
@@ -492,7 +548,7 @@ export default function SearchPage() {
 
           {/* ── Results column ── */}
           <div>
-            <div className="mb-4 flex items-center justify-between" ref={topRef}>
+            <div className="mb-4 flex items-center justify-between">
               <p className="text-sm text-slate-600">
                 <span className="font-bold text-slate-800">{t("search.results")}: </span>
                 <span className="font-extrabold text-brand-600">{filtered.length}</span>{" "}
