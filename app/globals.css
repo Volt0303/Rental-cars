@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #0b1437;
+  --color-navy-800: #111c44;
+  --color-navy-700: #1b2559;
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe6ff;
+  --color-brand-500: #2f6df6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+
+  --font-sans: var(--font-noto-sans-jp), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --background: #f4f7fe;
+  --foreground: #1b254b;
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin, subtle scrollbars for schedule/calendar areas */
+.scrollbar-thin::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
