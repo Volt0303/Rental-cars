@@ -566,15 +566,6 @@ export default function LandingPage() {
               );
             })}
           </div>
-
-          <div className="mt-8">
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-8 py-3 text-sm font-bold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700"
-            >
-              ログインして予約・管理する <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import {
   MapPin,
@@ -11,6 +12,7 @@ import {
   Heart,
   Info,
   ArrowRight,
+  X,
   Car,
   Bus,
   Truck,
@@ -296,10 +298,152 @@ function Pagination({
   );
 }
 
+// ---- Vehicle detail modal ----
+
+function VehicleDetailModal({
+  vehicle,
+  onClose,
+  onSelect,
+}: {
+  vehicle: Vehicle;
+  onClose: () => void;
+  onSelect: () => void;
+}) {
+  const { t } = useI18n();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+  if (!mounted) return null;
+
+  const fuelLabel =
+    vehicle.fuel === "ev" ? "EV" :
+    vehicle.fuel === "diesel" ? t("spec.diesel") :
+    t("spec.gas");
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[200] flex items-end justify-center bg-black/50 sm:items-center sm:p-4"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-lg overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:rounded-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
+          <h2 className="font-extrabold text-slate-800">{t("search.vehicleDetail")}</h2>
+          <button
+            onClick={onClose}
+            className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        {/* Image */}
+        <div className="px-5 pt-5">
+          <CarThumb
+            accent={vehicle.accent}
+            src={vehicle.image}
+            className="h-52 w-full rounded-xl"
+          />
+        </div>
+
+        {/* Info */}
+        <div className="px-5 py-4">
+          <div className="flex items-start justify-between">
+            <div>
+              {vehicle.recommended && (
+                <span className="mb-1.5 inline-block rounded-md bg-emerald-500 px-2 py-0.5 text-[11px] font-bold text-white">
+                  {t("search.recommended")}
+                </span>
+              )}
+              <h3 className="text-xl font-extrabold text-slate-800">{vehicle.name}</h3>
+              <p className="text-sm text-slate-500">{vehicle.nameJa}</p>
+            </div>
+            <div className="text-right">
+              <p className="text-[11px] text-slate-400">{t("search.basePrice")}（2{t("search.days")}）</p>
+              <p className="text-2xl font-extrabold text-slate-800">
+                {jpy(vehicle.basePrice2Days)}
+                <span className="ml-1 text-xs font-normal text-slate-400">（税込）</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Specs */}
+          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-slate-600">
+            <span className="flex items-center gap-1.5">
+              <Users className="h-4 w-4 text-slate-400" />
+              {vehicle.seats}{t("spec.seats")}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Settings2 className="h-4 w-4 text-slate-400" />
+              {t("spec.auto")}
+            </span>
+            <span className="flex items-center gap-1.5">
+              {vehicle.fuel === "ev"
+                ? <Zap className="h-4 w-4 text-slate-400" />
+                : <Fuel className="h-4 w-4 text-slate-400" />}
+              {fuelLabel}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <MapPin className="h-4 w-4 text-slate-400" />
+              {vehicle.store}
+            </span>
+          </div>
+
+          {/* Features */}
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {vehicle.features.map((f) => (
+              <span
+                key={f}
+                className="rounded-md bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600"
+              >
+                {FEATURE_LABEL[f] ?? f}
+              </span>
+            ))}
+          </div>
+
+          {/* Availability */}
+          <div className="mt-3">
+            {vehicle.stockNote === "last" ? (
+              <span className="inline-flex items-center gap-1.5">
+                <Badge tone="orange">{t("search.lastOne")}</Badge>
+                <span className="text-xs text-slate-500">{t("search.bookEarly")}</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5">
+                <Badge tone="green">{t("common.available")}</Badge>
+                <span className="text-xs text-slate-500">{t("common.instantBook")}</span>
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex gap-2 border-t border-slate-100 px-5 py-4">
+          <button
+            onClick={onClose}
+            className="flex-1 rounded-xl border border-slate-200 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-50"
+          >
+            {t("common.back")}
+          </button>
+          <Button className="flex-1" onClick={onSelect}>
+            {t("common.select")} <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+// ---- Vehicle card ----
+
 function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   const { t } = useI18n();
   const router = useRouter();
   const { setVehicleId } = useBooking();
+  const [showDetail, setShowDetail] = useState(false);
 
   const select = () => {
     setVehicleId(vehicle.id);
@@ -307,6 +451,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
   };
 
   return (
+    <>
     <Card className="relative p-4">
       {vehicle.recommended && (
         <span className="absolute left-4 top-4 z-10 rounded-md bg-emerald-500 px-2 py-0.5 text-[11px] font-bold text-white">
@@ -382,13 +527,22 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
             <Button className="w-full" onClick={select}>
               {t("common.select")} <ArrowRight className="h-4 w-4" />
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full" onClick={() => setShowDetail(true)}>
               <Info className="h-4 w-4" /> {t("search.vehicleDetail")}
             </Button>
           </div>
         </div>
       </div>
     </Card>
+
+    {showDetail && (
+      <VehicleDetailModal
+        vehicle={vehicle}
+        onClose={() => setShowDetail(false)}
+        onSelect={() => { setShowDetail(false); select(); }}
+      />
+    )}
+    </>
   );
 }
 
