@@ -207,7 +207,7 @@ export type QuoteStatus = "new" | "sent" | "waiting";
 export type Inquiry = {
   no: string;
   customer: string;
-  lang: "en" | "ja" | "ko" | "zh";
+  lang: "en" | "ja" | "zh";
   flag: string;
   langLabel: string;
   vehicle: string;
@@ -219,7 +219,6 @@ export type Inquiry = {
 export const INQUIRIES: Inquiry[] = [
   { no: "INQ-2024-0056", customer: "John Smith", lang: "en", flag: "🇺🇸", langLabel: "English", vehicle: "Toyota Alphard", period: "2024/06/10 - 2024/06/15", status: "waiting", receivedAt: "2024/05/20 14:30" },
   { no: "INQ-2024-0055", customer: "株式会社ABC 御中", lang: "ja", flag: "🇯🇵", langLabel: "日本語", vehicle: "Toyota Hiace", period: "2024/06/05 - 2024/06/07", status: "sent", receivedAt: "2024/05/20 11:15" },
-  { no: "INQ-2024-0054", customer: "김민수", lang: "ko", flag: "🇰🇷", langLabel: "한국어", vehicle: "Nissan Serena", period: "2024/06/12 - 2024/06/14", status: "new", receivedAt: "2024/05/20 09:45" },
   { no: "INQ-2024-0053", customer: "陈小明", lang: "zh", flag: "🇨🇳", langLabel: "中文", vehicle: "Mercedes-Benz V-Class", period: "2024/06/20 - 2024/06/25", status: "waiting", receivedAt: "2024/05/19 16:20" },
   { no: "INQ-2024-0052", customer: "Emma Wilson", lang: "en", flag: "🇬🇧", langLabel: "English", vehicle: "Tesla Model Y", period: "2024/06/08 - 2024/06/10", status: "sent", receivedAt: "2024/05/19 13:10" },
 ];
@@ -352,3 +351,225 @@ function _generateCatalog(): Vehicle[] {
 }
 
 export const SEARCH_VEHICLES: Vehicle[] = _generateCatalog();
+
+// ---- Quotations (見積) ----
+export type QuotationStatus = "draft" | "sent" | "accepted" | "expired";
+
+export type QuotationItem = { label: string; amount: number };
+
+export type Quotation = {
+  id: string;
+  customer: string;
+  customerRoman: string;
+  flag: string;
+  lang: "en" | "ja" | "zh";
+  langLabel: string;
+  vehicle: string;
+  period: string;
+  days: number;
+  status: QuotationStatus;
+  createdAt: string;
+  validUntil: string;
+  items: QuotationItem[];
+};
+
+export const QUOTATIONS: Quotation[] = [
+  {
+    id: "QUO-2024-0061",
+    customer: "John Smith", customerRoman: "John Smith", flag: "🇺🇸", lang: "en", langLabel: "English",
+    vehicle: "Toyota Alphard", period: "2024/07/10 - 07/15", days: 5,
+    status: "sent", createdAt: "2024/06/20", validUntil: "2024/06/27",
+    items: [
+      { label: "車両基本料金（5日）", amount: 60500 },
+      { label: "車両保険 CDW（5日）", amount: 5500 },
+      { label: "空港送迎サービス", amount: 3300 },
+      { label: "カーナビ・ETC", amount: 2200 },
+    ],
+  },
+  {
+    id: "QUO-2024-0060",
+    customer: "株式会社ABC 御中", customerRoman: "ABC Corp.", flag: "🇯🇵", lang: "ja", langLabel: "日本語",
+    vehicle: "Toyota Hiace Grand Cabin", period: "2024/07/05 - 07/07", days: 2,
+    status: "accepted", createdAt: "2024/06/19", validUntil: "2024/06/26",
+    items: [
+      { label: "車両基本料金（2日）", amount: 37400 },
+      { label: "車両保険 プレミアム（2日）", amount: 4400 },
+      { label: "チャイルドシート×2", amount: 2200 },
+    ],
+  },
+  {
+    id: "QUO-2024-0058",
+    customer: "陈小明", customerRoman: "Chen Xiaoming", flag: "🇨🇳", lang: "zh", langLabel: "中文",
+    vehicle: "Mercedes-Benz V-Class", period: "2024/07/20 - 07/25", days: 5,
+    status: "sent", createdAt: "2024/06/18", validUntil: "2024/06/25",
+    items: [
+      { label: "車両基本料金（5日）", amount: 88000 },
+      { label: "車両保険 プレミアム（5日）", amount: 11000 },
+      { label: "空港送迎サービス", amount: 3300 },
+    ],
+  },
+  {
+    id: "QUO-2024-0057",
+    customer: "Emma Wilson", customerRoman: "Emma Wilson", flag: "🇬🇧", lang: "en", langLabel: "English",
+    vehicle: "Tesla Model Y", period: "2024/06/28 - 06/30", days: 2,
+    status: "expired", createdAt: "2024/06/10", validUntil: "2024/06/17",
+    items: [
+      { label: "車両基本料金（2日）", amount: 28600 },
+      { label: "車両保険 CDW（2日）", amount: 2200 },
+    ],
+  },
+];
+
+// ---- Customers (顧客台帳) ----
+// Demonstrates the "enter once → reuse" concept: passport / license / contact
+// captured at booking time, reused across reservations, documents and WhatsApp.
+export type CustomerReservationStatus = "completed" | "active" | "upcoming" | "cancelled";
+
+export type CustomerReservation = {
+  id: string;
+  vehicle: string;
+  period: string;
+  amount: number;
+  status: CustomerReservationStatus;
+};
+
+export type WhatsAppMessage = {
+  from: "customer" | "staff";
+  text: string;
+  time: string;
+};
+
+export type Customer = {
+  id: string;
+  nameJa: string;
+  nameRoman: string;
+  flag: string;
+  nationality: string;
+  lang: "en" | "ja" | "zh";
+  email: string;
+  phone: string;
+  passport: string;
+  license: string;
+  registeredAt: string;
+  lastUsed: string;
+  reservations: CustomerReservation[];
+  whatsapp: WhatsAppMessage[];
+};
+
+export const CUSTOMERS: Customer[] = [
+  {
+    id: "CUST-0001",
+    nameJa: "山田 太郎",
+    nameRoman: "Taro Yamada",
+    flag: "🇯🇵",
+    nationality: "日本",
+    lang: "ja",
+    email: "taro.yamada@example.com",
+    phone: "080-1234-5678",
+    passport: "TZ1234567",
+    license: "123456789012",
+    registeredAt: "2023/04/12",
+    lastUsed: "2024/06/15",
+    reservations: [
+      { id: "RES-2024-0058", vehicle: "Toyota Alphard", period: "2024/06/15 - 06/17", amount: 31460, status: "active" },
+      { id: "RES-2024-0021", vehicle: "Nissan Serena",  period: "2024/03/02 - 03/05", amount: 24200, status: "completed" },
+      { id: "RES-2023-0142", vehicle: "Toyota Alphard", period: "2023/12/28 - 01/03", amount: 52800, status: "completed" },
+    ],
+    whatsapp: [
+      { from: "customer", text: "予約の受け取り場所を確認したいです。", time: "06/14 10:21" },
+      { from: "staff",    text: "成田空港第1ターミナル到着ロビーでお待ちしております。", time: "06/14 10:25" },
+      { from: "customer", text: "ありがとうございます！", time: "06/14 10:26" },
+    ],
+  },
+  {
+    id: "CUST-0002",
+    nameJa: "ジョン スミス",
+    nameRoman: "John Smith",
+    flag: "🇺🇸",
+    nationality: "アメリカ",
+    lang: "en",
+    email: "john.smith@example.com",
+    phone: "+1 415-555-0188",
+    passport: "US8842019",
+    license: "D-USA-77120",
+    registeredAt: "2024/02/08",
+    lastUsed: "2024/06/10",
+    reservations: [
+      { id: "RES-2024-0056", vehicle: "Tesla Model Y", period: "2024/06/10 - 06/15", amount: 71500, status: "completed" },
+      { id: "RES-2024-0009", vehicle: "Tesla Model Y", period: "2024/01/20 - 01/24", amount: 57200, status: "completed" },
+    ],
+    whatsapp: [
+      { from: "customer", text: "Can I extend the rental by one day?", time: "06/13 18:02" },
+      { from: "staff",    text: "Yes, we can extend until 06/16. The extra fee is ¥14,300.", time: "06/13 18:10" },
+      { from: "customer", text: "Perfect, please proceed.", time: "06/13 18:12" },
+    ],
+  },
+  {
+    id: "CUST-0004",
+    nameJa: "陳 小明",
+    nameRoman: "Chen Xiaoming",
+    flag: "🇨🇳",
+    nationality: "中国",
+    lang: "zh",
+    email: "chen.xm@example.com",
+    phone: "+86 138-0013-8000",
+    passport: "CN7733210",
+    license: "CHN-9981-220",
+    registeredAt: "2024/05/18",
+    lastUsed: "2024/06/20",
+    reservations: [
+      { id: "RES-2024-0053", vehicle: "Mercedes-Benz V-Class", period: "2024/06/20 - 06/25", amount: 88000, status: "upcoming" },
+    ],
+    whatsapp: [
+      { from: "customer", text: "可以提供中文的合同吗？", time: "06/18 14:30" },
+      { from: "staff",    text: "可以，我们会准备中文版的租赁合同。", time: "06/18 14:36" },
+    ],
+  },
+  {
+    id: "CUST-0005",
+    nameJa: "エマ ウィルソン",
+    nameRoman: "Emma Wilson",
+    flag: "🇬🇧",
+    nationality: "イギリス",
+    lang: "en",
+    email: "emma.wilson@example.com",
+    phone: "+44 7700-900123",
+    passport: "GB4410927",
+    license: "UK-EMMA-4410",
+    registeredAt: "2023/09/22",
+    lastUsed: "2024/06/08",
+    reservations: [
+      { id: "RES-2024-0052", vehicle: "Tesla Model Y",  period: "2024/06/08 - 06/10", amount: 28600, status: "completed" },
+      { id: "RES-2024-0014", vehicle: "Toyota Hiace",   period: "2024/02/14 - 02/18", amount: 37400, status: "completed" },
+      { id: "RES-2023-0098", vehicle: "Nissan Serena",  period: "2023/10/01 - 10/04", amount: 24750, status: "cancelled" },
+    ],
+    whatsapp: [
+      { from: "staff",    text: "Thank you for choosing COMPASS CAR! Your pick-up is confirmed.", time: "06/07 16:00" },
+      { from: "customer", text: "Thanks, see you tomorrow!", time: "06/07 16:05" },
+    ],
+  },
+  {
+    id: "CUST-0006",
+    nameJa: "株式会社ABC（佐藤）",
+    nameRoman: "ABC Corp. (Sato)",
+    flag: "🇯🇵",
+    nationality: "日本",
+    lang: "ja",
+    email: "sato@abc-corp.co.jp",
+    phone: "03-5555-0042",
+    passport: "—",
+    license: "987654321098",
+    registeredAt: "2023/06/30",
+    lastUsed: "2024/06/05",
+    reservations: [
+      { id: "RES-2024-0055", vehicle: "Toyota Hiace", period: "2024/06/05 - 06/07", amount: 37400, status: "completed" },
+      { id: "RES-2024-0031", vehicle: "Toyota Hiace", period: "2024/04/10 - 04/12", amount: 37400, status: "completed" },
+      { id: "RES-2024-0007", vehicle: "Toyota Hiace", period: "2024/01/15 - 01/18", amount: 56100, status: "completed" },
+      { id: "RES-2023-0120", vehicle: "Toyota Hiace", period: "2023/11/20 - 11/22", amount: 37400, status: "completed" },
+    ],
+    whatsapp: [
+      { from: "customer", text: "来月の社員旅行で再度お願いします。", time: "06/04 11:00" },
+      { from: "staff",    text: "いつもありがとうございます。詳細をお送りください。", time: "06/04 11:15" },
+    ],
+  },
+];

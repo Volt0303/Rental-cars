@@ -9,21 +9,20 @@ import {
   useState,
 } from "react";
 
-export type Lang = "ja" | "en" | "zh" | "ko";
+export type Lang = "ja" | "en" | "zh";
 
 export const LANGUAGES: { code: Lang; label: string; flag: string }[] = [
   { code: "ja", label: "日本語", flag: "🇯🇵" },
   { code: "en", label: "English", flag: "🇬🇧" },
   { code: "zh", label: "中文", flag: "🇨🇳" },
-  { code: "ko", label: "한국어", flag: "🇰🇷" },
 ];
 
 type Dict = Record<string, string>;
 
 /**
  * Demo i18n dictionary. Japanese is the base language; English is fully
- * translated. Chinese / Korean are included to demonstrate the multilingual
- * architecture and fall back to Japanese for any missing key.
+ * translated. Chinese is included to demonstrate the multilingual
+ * architecture and falls back to Japanese for any missing key.
  */
 const ja: Dict = {
   "brand.name": "Rentacar Pro",
@@ -665,24 +664,7 @@ const zh: Dict = {
   "docs.title": "单据管理",
 };
 
-const ko: Dict = {
-  "landing.title": "렌터카 업무 관리 시스템",
-  "landing.customer.title": "고객용 사이트",
-  "landing.admin.title": "관리 시스템",
-  "landing.enter": "열기",
-  "common.next": "다음",
-  "common.back": "뒤로",
-  "common.select": "선택",
-  "search.title": "차량 검색",
-  "cnav.vehicles": "차량 찾기",
-  "options.title": "옵션 선택",
-  "info.title": "고객 정보 입력",
-  "dash.title": "대시보드",
-  "res.title": "예약 일정",
-  "docs.title": "서류 관리",
-};
-
-const DICTS: Record<Lang, Dict> = { ja, en, zh, ko };
+const DICTS: Record<Lang, Dict> = { ja, en, zh };
 
 type I18nContext = {
   lang: Lang;

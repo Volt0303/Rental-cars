@@ -10,6 +10,7 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { ScheduleGantt, ScheduleLegend } from "@/components/admin/ScheduleGantt";
+import { ReturnSettlementModal, type ReturnInfo } from "@/components/admin/ReturnSettlementModal";
 import { Card, Button, Badge } from "@/components/ui/primitives";
 import {
   SCHEDULE_BARS, SCHEDULE_VEHICLES, SCHEDULE_STORES,
@@ -121,6 +122,10 @@ export default function ReservationsPage() {
 
   // Detail panel selection
   const [selectedId, setSelectedId] = useState("b3");
+
+  // Return settlement
+  const [settleTarget, setSettleTarget] = useState<(ReturnInfo & { barId: string }) | null>(null);
+  const [completedReturns, setCompletedReturns] = useState<Set<string>>(new Set());
 
   // ── New reservation form ─────────────────────────────────────────────────
   const [newForm, setNewForm] = useState({
@@ -728,11 +733,12 @@ export default function ReservationsPage() {
           {viewMode === "return" && (
             <div className="space-y-4">
               {/* Summary */}
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                 {[
-                  { label: "本日返却",   count: returnBars.filter((b) => b.endDay === 0).length, icon: AlertTriangle, color: "text-rose-500 bg-rose-50" },
-                  { label: "明日返却",   count: returnBars.filter((b) => b.endDay === 1).length, icon: Clock,         color: "text-amber-500 bg-amber-50" },
-                  { label: "今週合計",   count: returnBars.length,                                icon: CheckCircle2,  color: "text-slate-500 bg-slate-50" },
+                  { label: "本日返却",   count: returnBars.filter((b) => b.endDay === 0 && !completedReturns.has(b.id)).length, icon: AlertTriangle, color: "text-rose-500 bg-rose-50" },
+                  { label: "明日返却",   count: returnBars.filter((b) => b.endDay === 1 && !completedReturns.has(b.id)).length, icon: Clock,         color: "text-amber-500 bg-amber-50" },
+                  { label: "返却完了",   count: completedReturns.size,                                                            icon: CheckCircle2,  color: "text-emerald-500 bg-emerald-50" },
+                  { label: "今週合計",   count: returnBars.length,                                                                icon: RotateCcw,     color: "text-slate-500 bg-slate-50" },
                 ].map((s) => (
                   <Card key={s.label} className="flex items-center gap-3 p-4">
                     <span className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg", s.color)}>
@@ -757,7 +763,8 @@ export default function ReservationsPage() {
                         <th className="pb-2 pr-4">車両</th>
                         <th className="pb-2 pr-4">店舗</th>
                         <th className="pb-2 pr-4">返却予定日時</th>
-                        <th className="pb-2">状況</th>
+                        <th className="pb-2 pr-4">状況</th>
+                        <th className="pb-2 text-right">返却処理</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -765,8 +772,9 @@ export default function ReservationsPage() {
                         const sv = SCHEDULE_VEHICLES.find((v) => v.id === b.vehicleId)!;
                         const isToday    = b.endDay === 0;
                         const isTomorrow = b.endDay === 1;
+                        const isDone     = completedReturns.has(b.id);
                         return (
-                          <tr key={b.id} className={cn("border-b border-slate-50 transition-colors hover:bg-slate-50", isToday && "bg-rose-50/40")}>
+                          <tr key={b.id} className={cn("border-b border-slate-50 transition-colors hover:bg-slate-50", isToday && !isDone && "bg-rose-50/40", isDone && "bg-emerald-50/40")}>
                             <td className="py-2.5 pr-4 font-mono text-xs text-slate-400">{resId(b)}</td>
                             <td className="py-2.5 pr-4 font-medium text-slate-700">{b.label}</td>
                             <td className="py-2.5 pr-4 text-slate-500">{sv?.name ?? "—"}</td>
@@ -774,8 +782,12 @@ export default function ReservationsPage() {
                             <td className="py-2.5 pr-4 text-slate-500">
                               {WEEK_DATE_LABELS[b.endDay]} {Math.round(b.endFrac * 24).toString().padStart(2,"0")}:00
                             </td>
-                            <td className="py-2.5">
-                              {isToday ? (
+                            <td className="py-2.5 pr-4">
+                              {isDone ? (
+                                <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700">
+                                  <CheckCircle2 className="h-3 w-3" /> 完了
+                                </span>
+                              ) : isToday ? (
                                 <span className="inline-flex items-center gap-1 rounded-full bg-rose-100 px-2.5 py-0.5 text-[11px] font-bold text-rose-600">
                                   <AlertTriangle className="h-3 w-3" /> 本日返却
                                 </span>
@@ -783,6 +795,25 @@ export default function ReservationsPage() {
                                 <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-[11px] font-bold text-amber-600">明日返却</span>
                               ) : (
                                 <Badge tone="blue">{t("vstatus.inUse")}</Badge>
+                              )}
+                            </td>
+                            <td className="py-2.5 text-right">
+                              {isDone ? (
+                                <span className="text-xs text-slate-400">処理済み</span>
+                              ) : (
+                                <button
+                                  onClick={() => setSettleTarget({
+                                    barId: b.id,
+                                    resId: resId(b),
+                                    customer: b.label,
+                                    vehicle: sv?.name ?? "—",
+                                    store: sv?.store ?? "—",
+                                    scheduledReturn: `${WEEK_DATE_LABELS[b.endDay]} ${Math.round(b.endFrac * 24).toString().padStart(2,"0")}:00`,
+                                  })}
+                                  className="inline-flex items-center gap-1.5 rounded-lg bg-caramel-500 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-caramel-600"
+                                >
+                                  <RotateCcw className="h-3.5 w-3.5" /> 返却処理
+                                </button>
                               )}
                             </td>
                           </tr>
@@ -887,6 +918,17 @@ export default function ReservationsPage() {
           </Card>
         )}
       </div>
+
+      {/* Return settlement modal */}
+      {settleTarget && (
+        <ReturnSettlementModal
+          info={settleTarget}
+          onClose={() => setSettleTarget(null)}
+          onComplete={() =>
+            setCompletedReturns((prev) => new Set(prev).add(settleTarget.barId))
+          }
+        />
+      )}
     </AdminShell>
   );
 }

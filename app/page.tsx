@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import { CompassCarLogo } from "@/components/CompassCarLogo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import {
+  FacebookIcon, InstagramIcon, ThreadsIcon, WhatsAppIcon,
+} from "@/components/SocialIcons";
 import { cn } from "@/lib/utils";
 
 // ── Static data ───────────────────────────────────────────────────────────────
@@ -25,7 +28,7 @@ const FEATURES = [
   {
     icon: Languages,
     title: "多言語スタッフ対応",
-    desc: "日本語・英語・中国語・韓国語に対応したスタッフが丁寧にご案内します。",
+    desc: "日本語・英語・中国語に対応したスタッフが丁寧にご案内します。",
     color: "text-caramel-500 bg-caramel-400/10",
   },
   {
@@ -112,7 +115,7 @@ const INSURANCE_PLANS = [
 
 const STATS = [
   { value: "1,000+", label: "外国人ご利用実績" },
-  { value: "4言語",  label: "対応言語数"       },
+  { value: "3言語",  label: "対応言語数"       },
   { value: "7店舗",  label: "全国拠点数"       },
   { value: "24h",    label: "緊急サポート"     },
 ];
@@ -128,6 +131,13 @@ const CAROUSEL = [
   "/carousels/8.png",
   "/carousels/9.png",
   "/carousels/10.png",
+];
+
+const SOCIALS = [
+  { label: "Facebook",  href: "https://facebook.com/compasscar",  icon: FacebookIcon,  handle: "@compasscar" },
+  { label: "Instagram", href: "https://instagram.com/compasscar", icon: InstagramIcon, handle: "@compass_car" },
+  { label: "Threads",   href: "https://threads.net/@compasscar",  icon: ThreadsIcon,   handle: "@compass_car" },
+  { label: "WhatsApp",  href: "https://wa.me/817249035400",       icon: WhatsAppIcon,  handle: "+81 72-490-3540" },
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
@@ -534,7 +544,7 @@ export default function LandingPage() {
               { label: "所在地",     value: "〒100-0001 東京都千代田区千代田1-1" },
               { label: "電話番号",   value: "+81-72-490-3540" },
               { label: "メール",     value: "info@compass-car.jp" },
-              { label: "対応言語",   value: "日本語 / English / 中文 / 한국어" },
+              { label: "対応言語",   value: "日本語 / English / 中文" },
               { label: "営業時間",   value: "9:00〜18:00（年中無休）" },
             ].map((r, i) => (
               <div
@@ -586,6 +596,41 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ══ Follow / SNS ══════════════════════════════════════════════════════ */}
+      <section className="bg-warm-800 py-14">
+        <div className="mx-auto max-w-6xl px-5 text-center">
+          <span className="mb-3 inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.28em] text-caramel-300">
+            <span className="h-px w-6 bg-caramel-300/60" />Follow Us<span className="h-px w-6 bg-caramel-300/60" />
+          </span>
+          <h2 className="mb-2 text-2xl font-extrabold text-white">公式SNSで最新情報をチェック</h2>
+          <p className="mb-8 text-sm text-beige-200/75">
+            キャンペーン・新着車両・旅のヒントを各SNSで配信中。お問い合わせはWhatsAppからも承ります。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {SOCIALS.map((s) => {
+              const Icon = s.icon;
+              return (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-3 rounded-xl bg-white/[0.06] p-4 ring-1 ring-white/10 transition hover:bg-white/[0.12] hover:ring-caramel-300/40"
+                >
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-caramel-400/15 text-caramel-300 transition group-hover:bg-caramel-400/25">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span className="min-w-0 text-left">
+                    <span className="block text-sm font-bold text-white">{s.label}</span>
+                    <span className="block truncate text-xs text-beige-200/60">{s.handle}</span>
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ══ Footer ════════════════════════════════════════════════════════════ */}
       <footer className="border-t border-caramel-400/20 bg-warm-900 py-10">
         <div className="mx-auto max-w-6xl px-5">
@@ -598,6 +643,23 @@ export default function LandingPage() {
                 </a>
               ))}
             </nav>
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="flex h-8 w-8 items-center justify-center rounded-lg text-beige-200/60 ring-1 ring-white/10 transition hover:text-caramel-300 hover:ring-caramel-300/40"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
+            </div>
             <LanguageSwitcher dark />
           </div>
           <div className="mt-8 border-t border-white/12 pt-6 text-center">
