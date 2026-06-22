@@ -31,9 +31,9 @@ export default function CompletePage() {
           <h1 className="mt-5 text-2xl font-extrabold text-slate-800">{t("complete.title")}</h1>
           <p className="mt-2 text-sm text-slate-500">{t("complete.subtitle")}</p>
 
-          <div className="mt-5 rounded-2xl bg-brand-50 px-5 py-4">
+          <div className="mt-5 rounded-2xl bg-caramel-400/10 px-5 py-4">
             <p className="text-xs text-slate-500">{t("complete.reservationNo")}</p>
-            <p className="text-2xl font-extrabold tracking-wide text-brand-600">
+            <p className="text-2xl font-extrabold tracking-wide text-caramel-500">
               {b.reservationNo}
             </p>
           </div>
@@ -45,7 +45,7 @@ export default function CompletePage() {
                 const Icon = s.icon;
                 return (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-brand-600">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-100 text-caramel-500">
                       <Icon className="h-4 w-4" />
                     </span>
                     <span className="pt-1.5 text-sm text-slate-600">{s.text}</span>

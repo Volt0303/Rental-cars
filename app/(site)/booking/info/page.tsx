@@ -44,7 +44,7 @@ function Input({
         defaultValue={defaultValue}
         disabled={disabled}
         className={cn(
-          "w-full rounded-xl px-3 py-2.5 text-sm ring-1 outline-none focus:ring-2 focus:ring-brand-400",
+          "w-full rounded-xl px-3 py-2.5 text-sm ring-1 outline-none focus:ring-2 focus:ring-caramel-400",
           disabled
             ? "bg-slate-100 text-slate-400 ring-slate-200"
             : "bg-white text-slate-700 ring-slate-300"
@@ -91,7 +91,7 @@ function Section({
     <Card className="p-5">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="flex items-center gap-2 font-bold text-slate-800">
-          <Icon className="h-5 w-5 text-brand-600" /> {title}
+          <Icon className="h-5 w-5 text-caramel-500" /> {title}
         </h3>
         {action}
       </div>
@@ -136,7 +136,7 @@ export default function InfoPage() {
                     onClick={() => setSameAsBooker((v) => !v)}
                     className={cn(
                       "flex h-5 w-5 items-center justify-center rounded-md border",
-                      sameAsBooker ? "border-brand-600 bg-brand-600 text-white" : "border-slate-300"
+                      sameAsBooker ? "border-caramel-500 bg-caramel-500 text-white" : "border-slate-300"
                     )}
                   >
                     {sameAsBooker && <Check className="h-3.5 w-3.5" />}
@@ -165,7 +165,7 @@ export default function InfoPage() {
                   rows={3}
                   maxLength={300}
                   placeholder={t("info.requestPlaceholder")}
-                  className="w-full resize-none rounded-xl bg-white p-3 text-sm text-slate-700 ring-1 ring-slate-300 outline-none focus:ring-2 focus:ring-brand-400"
+                  className="w-full resize-none rounded-xl bg-white p-3 text-sm text-slate-700 ring-1 ring-slate-300 outline-none focus:ring-2 focus:ring-caramel-400"
                 />
               </label>
             </Section>

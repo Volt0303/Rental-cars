@@ -34,7 +34,7 @@ function Block({
   return (
     <Card className="p-5">
       <h3 className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-        <Icon className="h-5 w-5 text-brand-600" /> {title}
+        <Icon className="h-5 w-5 text-caramel-500" /> {title}
       </h3>
       <dl className="divide-y divide-slate-100">{children}</dl>
     </Card>
@@ -96,7 +96,7 @@ export default function ConfirmPage() {
                   onClick={() => setAgreed((v) => !v)}
                   className={cn(
                     "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border",
-                    agreed ? "border-brand-600 bg-brand-600 text-white" : "border-slate-300"
+                    agreed ? "border-caramel-500 bg-caramel-500 text-white" : "border-slate-300"
                   )}
                 >
                   {agreed && <Check className="h-3.5 w-3.5" />}

@@ -84,7 +84,7 @@ function SelectField({
   return (
     <label className="block">
       {label && <span className="mb-1 block text-xs font-medium text-slate-500">{label}</span>}
-      <span className="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2.5 ring-1 ring-slate-200 transition-shadow focus-within:ring-brand-400">
+      <span className="flex items-center gap-2 rounded-xl bg-beige-50 px-3 py-2.5 ring-1 ring-beige-200 transition-shadow focus-within:ring-caramel-400">
         <Icon className="h-4 w-4 shrink-0 text-slate-400" />
         <select
           value={value}
@@ -115,7 +115,7 @@ function DateTimeRow({
   return (
     <label className="block">
       <span className="mb-1 block text-xs font-medium text-slate-500">{label}</span>
-      <span className="flex items-center gap-2 rounded-xl bg-slate-50 px-3 py-2.5 ring-1 ring-slate-200 transition-shadow focus-within:ring-brand-400">
+      <span className="flex items-center gap-2 rounded-xl bg-beige-50 px-3 py-2.5 ring-1 ring-beige-200 transition-shadow focus-within:ring-caramel-400">
         <Calendar className="h-4 w-4 shrink-0 text-slate-400" />
         <input
           type="date"
@@ -159,7 +159,7 @@ function SkeletonCard() {
         <div className="hidden sm:flex sm:w-44 sm:shrink-0 sm:flex-col sm:gap-3">
           <div className="h-4 w-full rounded bg-slate-100" />
           <div className="h-8 w-full rounded-xl bg-slate-200" />
-          <div className="h-9 w-full rounded-xl bg-brand-100" />
+          <div className="h-9 w-full rounded-xl bg-caramel-400/20" />
           <div className="h-9 w-full rounded-xl bg-slate-100" />
         </div>
       </div>
@@ -245,8 +245,8 @@ function Pagination({
               className={cn(
                 "flex h-9 w-9 items-center justify-center rounded-xl text-sm font-medium transition-colors",
                 p === page
-                  ? "bg-brand-600 text-white shadow-sm"
-                  : "text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50"
+                  ? "bg-caramel-500 text-white shadow-sm"
+                  : "text-warm-700 ring-1 ring-beige-200 hover:bg-beige-50"
               )}
             >
               {p}
@@ -280,13 +280,13 @@ function Pagination({
             "w-14 rounded-lg px-2 py-1.5 text-center text-sm font-medium outline-none ring-1 transition-colors",
             error
               ? "ring-rose-400 bg-rose-50 text-rose-600"
-              : "ring-slate-200 bg-slate-50 text-slate-700 focus:ring-brand-400"
+              : "ring-beige-200 bg-beige-50 text-warm-700 focus:ring-caramel-400"
           )}
         />
         <span className="text-slate-400">/ {total}</span>
         <button
           onClick={commit}
-          className="rounded-lg bg-slate-100 px-3 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-200 active:bg-slate-300 transition-colors"
+          className="rounded-lg bg-beige-200 px-3 py-1.5 text-sm font-medium text-warm-700 hover:bg-beige-300 active:bg-beige-300 transition-colors"
         >
           移動
         </button>
@@ -519,7 +519,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
               {jpy(vehicle.basePrice2Days)}
               <span className="ml-1 text-xs font-normal text-slate-400">（税込）</span>
             </p>
-            <span className="mt-0.5 block text-xs text-brand-600 hover:underline cursor-pointer">
+            <span className="mt-0.5 block text-xs text-caramel-500 hover:underline cursor-pointer">
               {t("search.priceDetail")}
             </span>
           </div>
@@ -617,7 +617,7 @@ export default function SearchPage() {
   const fmtDate      = (d: string) => d.replace(/-/g, "/");
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-beige-50">
       <SiteHeader active="cnav.vehicles" />
       <BookingSteps current={0} />
 
@@ -631,7 +631,7 @@ export default function SearchPage() {
         <div className="mb-4 flex items-center justify-between">
           <p className="text-sm text-slate-600">
             <span className="font-bold text-slate-800">{t("search.results")}: </span>
-            <span className="font-extrabold text-brand-600">{filtered.length}</span>{" "}
+            <span className="font-extrabold text-caramel-500">{filtered.length}</span>{" "}
             {t("search.found")}
           </p>
           <div className="flex items-center gap-2 text-sm">
@@ -653,7 +653,7 @@ export default function SearchPage() {
                 {STORES.map((s) => <option key={s}>{s}</option>)}
               </SelectField>
               <label className="mt-2 flex items-center gap-2 text-xs text-slate-500">
-                <input type="checkbox" className="accent-brand-600" />
+                <input type="checkbox" className="accent-caramel-500" />
                 {t("search.changeReturn")}
               </label>
             </div>
@@ -688,8 +688,8 @@ export default function SearchPage() {
                       className={cn(
                         "flex flex-col items-center gap-1 rounded-xl px-2 py-2.5 text-[11px] font-medium ring-1 transition-colors",
                         active
-                          ? "bg-brand-600 text-white ring-brand-600"
-                          : "bg-white text-slate-600 ring-slate-200 hover:bg-slate-50"
+                          ? "bg-caramel-500 text-white ring-caramel-500"
+                          : "bg-white text-warm-700 ring-beige-200 hover:bg-beige-50"
                       )}
                     >
                       <Icon className="h-4 w-4" />
@@ -747,7 +747,7 @@ export default function SearchPage() {
                 <h3 className="font-bold text-slate-800">{t("search.confirmTitle")}</h3>
                 <button
                   onClick={doSearch}
-                  className="text-xs font-bold text-brand-600 hover:underline"
+                  className="text-xs font-bold text-caramel-500 hover:underline"
                 >
                   {t("search.edit")}
                 </button>
@@ -773,7 +773,7 @@ export default function SearchPage() {
               <p className="text-sm font-bold text-slate-700">{t("search.help")}</p>
               <p className="mb-3 text-xs text-slate-400">{t("search.helpDesc")}</p>
               <div className="space-y-2">
-                <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-brand-600 ring-1 ring-brand-200 hover:bg-brand-50 cursor-pointer">
+                <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-caramel-500 ring-1 ring-caramel-400/40 hover:bg-caramel-400/10 cursor-pointer">
                   03-1234-5678
                 </a>
                 <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50 cursor-pointer">

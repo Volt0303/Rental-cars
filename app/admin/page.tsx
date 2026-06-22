@@ -83,7 +83,7 @@ function StatCard({
       </div>
       <Link
         href="#"
-        className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2.5 text-xs font-medium text-brand-600"
+        className="mt-3 flex items-center justify-between border-t border-slate-100 pt-2.5 text-xs font-medium text-caramel-500"
       >
         {t("common.viewDetail")}
         <ArrowRight className="h-3.5 w-3.5" />
@@ -134,7 +134,7 @@ export default function DashboardPage() {
                       key={k}
                       className={cn(
                         "px-3 py-1.5 text-xs font-bold",
-                        i === 1 ? "bg-brand-600 text-white" : "text-slate-500"
+                        i === 1 ? "bg-caramel-500 text-white" : "text-slate-500"
                       )}
                     >
                       {t(k)}
@@ -165,7 +165,7 @@ export default function DashboardPage() {
           <Card className="p-5">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-base font-bold text-slate-800">{t("dash.recentInquiries")}</h3>
-              <Link href="#" className="text-xs font-bold text-brand-600 hover:underline">
+              <Link href="#" className="text-xs font-bold text-caramel-500 hover:underline">
                 {t("common.viewAll")}
               </Link>
             </div>
@@ -212,7 +212,7 @@ export default function DashboardPage() {
           <Card className="p-5">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-base font-bold text-slate-800">{t("dash.maintenanceAlerts")}</h3>
-              <Link href="#" className="text-xs font-bold text-brand-600 hover:underline">
+              <Link href="#" className="text-xs font-bold text-caramel-500 hover:underline">
                 {t("common.viewAll")}
               </Link>
             </div>
@@ -250,7 +250,7 @@ export default function DashboardPage() {
           <Card className="p-5">
             <div className="mb-3 flex items-center justify-between">
               <h3 className="text-base font-bold text-slate-800">{t("dash.todayReturns")}</h3>
-              <Link href="#" className="text-xs font-bold text-brand-600 hover:underline">
+              <Link href="#" className="text-xs font-bold text-caramel-500 hover:underline">
                 {t("common.viewAll")}
               </Link>
             </div>

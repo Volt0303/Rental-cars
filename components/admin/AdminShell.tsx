@@ -49,9 +49,9 @@ export function AdminShell({
   const pathname = usePathname();
 
   return (
-    <div className="flex min-h-screen bg-[#f4f7fe]">
+    <div className="flex min-h-screen bg-beige-50">
       {/* Sidebar */}
-      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col bg-navy-900 text-slate-300 lg:flex">
+      <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col bg-warm-900 text-slate-300 lg:flex">
 
         {/* Logo row with collapse button in upper-right */}
         <div className="relative flex h-16 items-center px-4">
@@ -101,7 +101,7 @@ export function AdminShell({
                 className={cn(
                   "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                   active
-                    ? "bg-brand-600 text-white shadow-sm"
+                    ? "bg-caramel-500 text-white shadow-sm"
                     : "text-slate-300 hover:bg-white/5 hover:text-white"
                 )}
               >
@@ -126,7 +126,7 @@ export function AdminShell({
               </span>
             </button>
             <div className="flex items-center gap-2 rounded-full py-1 pl-1 pr-2 hover:bg-slate-100">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-caramel-500 text-sm font-bold text-white">
                 YS
               </span>
               <span className="hidden leading-tight sm:block">

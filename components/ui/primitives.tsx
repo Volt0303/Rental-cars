@@ -40,7 +40,7 @@ type BtnVariant = "primary" | "outline" | "ghost" | "danger";
 
 const btnStyles: Record<BtnVariant, string> = {
   primary:
-    "bg-brand-600 text-white hover:bg-brand-700 shadow-sm shadow-brand-600/20",
+    "bg-caramel-500 text-white hover:bg-caramel-600 shadow-sm shadow-caramel-500/20",
   outline:
     "bg-white text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50",
   ghost: "text-slate-600 hover:bg-slate-100",

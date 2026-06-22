@@ -18,7 +18,7 @@ const NAV: { key: string; href: string }[] = [
 export function SiteHeader({ active = "cnav.vehicles" }: { active?: string }) {
   const { t } = useI18n();
   return (
-    <header className="sticky top-0 z-40 bg-navy-900 text-white">
+    <header className="sticky top-0 z-40 bg-warm-900 text-white">
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-6 px-5">
         <Link href="/">
           <CompassCarLogo />
@@ -39,7 +39,7 @@ export function SiteHeader({ active = "cnav.vehicles" }: { active?: string }) {
               <span className="relative">
                 {t(item.key)}
                 {item.key === active && (
-                  <span className="absolute -bottom-[18px] left-0 right-0 h-0.5 rounded bg-brand-500" />
+                  <span className="absolute -bottom-[18px] left-0 right-0 h-0.5 rounded bg-caramel-400" />
                 )}
               </span>
             </Link>

@@ -105,7 +105,7 @@ export default function OptionsPage() {
             {/* Insurance */}
             <Card className="p-5">
               <h3 className="mb-3 flex items-center gap-2 font-bold text-slate-800">
-                <Shield className="h-5 w-5 text-brand-600" /> {t("options.insurance")}
+                <Shield className="h-5 w-5 text-caramel-500" /> {t("options.insurance")}
               </h3>
               <div className="space-y-3">
                 {INSURANCE_OPTIONS.map((opt) => {
@@ -117,19 +117,19 @@ export default function OptionsPage() {
                       className={cn(
                         "flex w-full items-start gap-3 rounded-2xl border p-4 text-left transition-colors",
                         active
-                          ? "border-brand-500 bg-brand-50/60 ring-1 ring-brand-500"
+                          ? "border-caramel-400 bg-caramel-400/10 ring-1 ring-caramel-400"
                           : "border-slate-200 hover:bg-slate-50"
                       )}
                     >
                       <span
                         className={cn(
                           "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border",
-                          active ? "border-brand-600 bg-brand-600 text-white" : "border-slate-300"
+                          active ? "border-caramel-500 bg-caramel-500 text-white" : "border-slate-300"
                         )}
                       >
                         {active && <Check className="h-3.5 w-3.5" />}
                       </span>
-                      <ShieldCheck className={cn("mt-0.5 h-5 w-5 shrink-0", active ? "text-brand-600" : "text-slate-400")} />
+                      <ShieldCheck className={cn("mt-0.5 h-5 w-5 shrink-0", active ? "text-caramel-500" : "text-slate-400")} />
                       <div className="flex-1">
                         <p className="flex items-center gap-2 font-bold text-slate-800">
                           {t(opt.nameKey)}
@@ -140,7 +140,7 @@ export default function OptionsPage() {
                           )}
                         </p>
                         <p className="mt-0.5 text-xs text-slate-500">{t(opt.descKey)}</p>
-                        <span className="mt-1 block text-xs text-brand-600 hover:underline cursor-pointer">
+                        <span className="mt-1 block text-xs text-caramel-500 hover:underline cursor-pointer">
                           {t("options.coverageDetail")}
                         </span>
                       </div>
@@ -168,11 +168,11 @@ export default function OptionsPage() {
                       className={cn(
                         "flex items-start gap-3 rounded-2xl border p-3.5 text-left transition-colors",
                         active
-                          ? "border-brand-500 bg-brand-50/60 ring-1 ring-brand-500"
+                          ? "border-caramel-400 bg-caramel-400/10 ring-1 ring-caramel-400"
                           : "border-slate-200 hover:bg-slate-50"
                       )}
                     >
-                      <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", active ? "text-brand-600" : "text-slate-400")} />
+                      <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", active ? "text-caramel-500" : "text-slate-400")} />
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold text-slate-800">{t(opt.nameKey)}</p>
                         <p className="text-[11px] text-slate-500">{t(opt.descKey)}</p>
@@ -184,7 +184,7 @@ export default function OptionsPage() {
                       <span
                         className={cn(
                           "flex h-5 w-5 shrink-0 items-center justify-center rounded-md border",
-                          active ? "border-brand-600 bg-brand-600 text-white" : "border-slate-300"
+                          active ? "border-caramel-500 bg-caramel-500 text-white" : "border-slate-300"
                         )}
                       >
                         {active && <Check className="h-3.5 w-3.5" />}
@@ -198,7 +198,7 @@ export default function OptionsPage() {
             {/* Remarks */}
             <Card className="p-5">
               <h3 className="mb-2 flex items-center gap-2 font-bold text-slate-800">
-                <MessageSquare className="h-5 w-5 text-brand-600" /> {t("options.remarks")}
+                <MessageSquare className="h-5 w-5 text-caramel-500" /> {t("options.remarks")}
                 <span className="text-xs font-normal text-slate-400">（{t("options.optional")}）</span>
               </h3>
               <textarea
@@ -207,7 +207,7 @@ export default function OptionsPage() {
                 maxLength={300}
                 rows={3}
                 placeholder={t("options.remarksPlaceholder")}
-                className="w-full resize-none rounded-xl bg-slate-50 p-3 text-sm text-slate-700 ring-1 ring-slate-200 outline-none focus:ring-brand-400"
+                className="w-full resize-none rounded-xl bg-slate-50 p-3 text-sm text-slate-700 ring-1 ring-slate-200 outline-none focus:ring-caramel-400"
               />
               <p className="mt-1 text-right text-xs text-slate-400">{b.remarks.length} / 300</p>
             </Card>

@@ -29,9 +29,9 @@ export function BookingSteps({ current }: { current: number }) {
                     className={cn(
                       "flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold",
                       active
-                        ? "bg-brand-600 text-white"
+                        ? "bg-caramel-500 text-white"
                         : done
-                        ? "bg-brand-100 text-brand-600"
+                        ? "bg-caramel-400/20 text-caramel-500"
                         : "bg-slate-100 text-slate-400"
                     )}
                   >
@@ -41,7 +41,7 @@ export function BookingSteps({ current }: { current: number }) {
                     className={cn(
                       "whitespace-nowrap text-sm font-bold",
                       active
-                        ? "text-brand-600"
+                        ? "text-caramel-500"
                         : done
                         ? "text-slate-600"
                         : "text-slate-400"
@@ -54,7 +54,7 @@ export function BookingSteps({ current }: { current: number }) {
                   <div
                     className={cn(
                       "mx-3 h-px flex-1",
-                      done ? "bg-brand-300" : "bg-slate-200"
+                      done ? "bg-caramel-400/40" : "bg-beige-300"
                     )}
                   />
                 )}

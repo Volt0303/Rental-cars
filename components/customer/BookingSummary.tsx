@@ -53,7 +53,7 @@ export function BookingSummary({
           {changeHref && (
             <Link
               href={changeHref}
-              className="text-xs font-bold text-brand-600 hover:underline"
+              className="text-xs font-bold text-caramel-500 hover:underline"
             >
               {t("summary.change")}
             </Link>
@@ -113,9 +113,9 @@ export function BookingSummary({
           )}
         </div>
 
-        <div className="flex items-center justify-between bg-brand-50 px-5 py-3.5">
+        <div className="flex items-center justify-between bg-caramel-400/10 px-5 py-3.5">
           <span className="font-bold text-slate-700">{t("summary.total")}</span>
-          <span className="text-2xl font-extrabold text-brand-600">
+          <span className="text-2xl font-extrabold text-caramel-500">
             {jpy(showTax ? b.total : b.subtotal)}
           </span>
         </div>
@@ -138,7 +138,7 @@ export function BookingSummary({
           <p className="text-sm font-bold text-slate-700">{t("search.help")}</p>
           <p className="mb-3 text-xs text-slate-400">{t("search.helpDesc")}</p>
           <div className="space-y-2">
-            <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-brand-600 ring-1 ring-brand-200 hover:bg-brand-50">
+            <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-caramel-500 ring-1 ring-caramel-400/40 hover:bg-caramel-400/10">
               <Phone className="h-4 w-4" /> 03-1234-5678
             </a>
             <a className="flex items-center justify-center gap-2 rounded-xl py-2.5 text-sm font-bold text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50">

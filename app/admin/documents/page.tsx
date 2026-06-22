@@ -352,7 +352,7 @@ function ConsentDoc({ r }: { r: DemoReservation }) {
           "法令に基づく届出・行政機関からの照会への回答",
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-2">
-            <span className="mt-0.5 shrink-0 text-brand-500">（{i + 1}）</span>
+            <span className="mt-0.5 shrink-0 text-caramel-400">（{i + 1}）</span>
             <span>{item}</span>
           </div>
         ))}
@@ -363,7 +363,7 @@ function ConsentDoc({ r }: { r: DemoReservation }) {
         <p><span className="font-bold text-slate-700">第三者提供：</span>法令に基づく場合を除き、お客様の同意なく第三者に提供することはありません。</p>
         <p><span className="font-bold text-slate-700">開示・訂正：</span>個人情報の開示・訂正・削除を請求する権利を有します。</p>
       </div>
-      <div className="mb-6 rounded-lg border border-brand-200 bg-brand-50 p-3 text-xs text-brand-700">
+      <div className="mb-6 rounded-lg border border-caramel-400/30 bg-caramel-400/10 p-3 text-xs text-caramel-600">
         上記の個人情報取扱いについてご確認いただき、同意される場合は下記にご署名ください。
       </div>
       <SignatureSection parties={["お客様確認・同意署名"]} />
@@ -468,7 +468,7 @@ function PreviewModal({
           <button
             onClick={handleDownload}
             disabled={busy}
-            className="flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-brand-700 disabled:opacity-60"
+            className="flex items-center gap-1.5 rounded-lg bg-caramel-500 px-3 py-1.5 text-xs font-bold text-white hover:bg-caramel-600 disabled:opacity-60"
           >
             {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Download className="h-3.5 w-3.5" />}
             {busy ? "生成中..." : "PDFダウンロード"}
@@ -582,7 +582,7 @@ function DocCard({
         <button
           disabled={!visible}
           onClick={onPreview}
-          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 text-xs font-medium text-slate-600 transition-colors hover:border-brand-300 hover:bg-brand-50 hover:text-brand-700 disabled:pointer-events-none disabled:opacity-40"
+          className="flex flex-1 items-center justify-center gap-1.5 rounded-lg border border-slate-200 py-2 text-xs font-medium text-slate-600 transition-colors hover:border-caramel-300 hover:bg-caramel-400/10 hover:text-caramel-600 disabled:pointer-events-none disabled:opacity-40"
         >
           <Eye className="h-3.5 w-3.5" /> {t("docs.preview")}
         </button>
@@ -593,7 +593,7 @@ function DocCard({
             "flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-bold transition-colors disabled:pointer-events-none disabled:opacity-40",
             downloaded
               ? "bg-emerald-500 text-white"
-              : "bg-brand-600 text-white hover:bg-brand-700"
+              : "bg-caramel-500 text-white hover:bg-caramel-600"
           )}
         >
           {downloading ? (
@@ -672,16 +672,16 @@ export default function DocumentsPage() {
       {/* Header */}
       <div className="mb-4">
         <h2 className="flex items-center gap-2 text-xl font-extrabold text-slate-800">
-          <Files className="h-6 w-6 text-brand-600" /> {t("docs.title")}
+          <Files className="h-6 w-6 text-caramel-500" /> {t("docs.title")}
         </h2>
         <p className="text-sm text-slate-500">{t("docs.subtitle")}</p>
       </div>
 
       {/* Value-prop banner */}
-      <div className="mb-5 flex items-start gap-3 rounded-xl bg-brand-50 p-4 ring-1 ring-brand-100">
-        <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-brand-600" />
+      <div className="mb-5 flex items-start gap-3 rounded-xl bg-caramel-400/10 p-4 ring-1 ring-caramel-400/20">
+        <Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-caramel-500" />
         <p className="text-sm text-slate-700">
-          <span className="font-bold text-brand-700">一度の入力で4書類を自動生成。</span>
+          <span className="font-bold text-caramel-600">一度の入力で4書類を自動生成。</span>
           {"  "}現在の運用では同じ顧客情報を注文確認書・賃貸契約書・車両確認書・個人情報同意書の4種類に
           繰り返し転記しています。本システムでは予約時の入力から全書類を自動生成します。
         </p>
@@ -696,7 +696,7 @@ export default function DocumentsPage() {
             <div className="relative">
               <button
                 onClick={() => setShowPicker((v) => !v)}
-                className="flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-2.5 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition hover:ring-brand-300"
+                className="flex w-full items-center justify-between rounded-xl bg-slate-50 px-3 py-2.5 text-sm font-bold text-slate-700 ring-1 ring-slate-200 transition hover:ring-caramel-300"
               >
                 <span>{reservation.id} / {reservation.customer.split("　")[0]}</span>
                 <ChevronDown className={cn("h-4 w-4 text-slate-400 transition-transform", showPicker && "rotate-180")} />
@@ -708,8 +708,8 @@ export default function DocumentsPage() {
                       key={r.id}
                       onClick={() => handleSelectReservation(r.id)}
                       className={cn(
-                        "flex w-full flex-col px-4 py-3 text-left text-sm transition-colors hover:bg-brand-50",
-                        r.id === selectedId && "bg-brand-50"
+                        "flex w-full flex-col px-4 py-3 text-left text-sm transition-colors hover:bg-caramel-400/10",
+                        r.id === selectedId && "bg-caramel-400/10"
                       )}
                     >
                       <span className="font-bold text-slate-700">{r.id}</span>
@@ -738,8 +738,8 @@ export default function DocumentsPage() {
                 generated
                   ? "bg-emerald-500 text-white"
                   : generating
-                  ? "bg-brand-400 text-white"
-                  : "bg-brand-600 text-white hover:bg-brand-700"
+                  ? "bg-caramel-400 text-white"
+                  : "bg-caramel-500 text-white hover:bg-caramel-600"
               )}
               onClick={handleGenerate}
               disabled={generating}
@@ -757,8 +757,8 @@ export default function DocumentsPage() {
           {/* Flow hint */}
           <Card className="flex items-center justify-center gap-2 p-4 text-xs font-medium text-slate-500">
             <span className="rounded-md bg-slate-100 px-2 py-1">{t("step.info")}</span>
-            <ArrowRight className="h-3.5 w-3.5 text-brand-500" />
-            <span className="rounded-md bg-brand-100 px-2 py-1 text-brand-700">4書類 自動生成</span>
+            <ArrowRight className="h-3.5 w-3.5 text-caramel-400" />
+            <span className="rounded-md bg-caramel-400/15 px-2 py-1 text-caramel-600">4書類 自動生成</span>
           </Card>
 
           {/* Progress indicator */}
@@ -771,7 +771,7 @@ export default function DocumentsPage() {
                     {i < revealCount ? (
                       <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-500" />
                     ) : i === revealCount && generating ? (
-                      <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-brand-500" />
+                      <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-caramel-400" />
                     ) : (
                       <span className="h-3.5 w-3.5 shrink-0 rounded-full border border-slate-300" />
                     )}

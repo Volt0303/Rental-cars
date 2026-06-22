@@ -45,7 +45,7 @@ export function LanguageSwitcher({ dark = false }: { dark?: boolean }) {
               }}
               className={cn(
                 "flex w-full items-center gap-2 px-3 py-2 text-sm hover:bg-slate-50",
-                l.code === lang ? "font-bold text-brand-600" : "text-slate-700"
+                l.code === lang ? "font-bold text-caramel-500" : "text-slate-700"
               )}
             >
               <span className="text-base">{l.flag}</span>

@@ -80,7 +80,7 @@ function FilterSelect({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
-        className="w-full appearance-none rounded-lg bg-white px-3 py-2 text-sm text-slate-600 ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 disabled:cursor-not-allowed disabled:opacity-50"
+        className="w-full appearance-none rounded-lg bg-white px-3 py-2 text-sm text-slate-600 ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-caramel-500 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {children}
       </select>
@@ -100,7 +100,7 @@ function FormField({ label, error, children }: { label: string; error?: string; 
 
 function inputCls(error?: boolean) {
   return cn(
-    "w-full rounded-lg bg-white px-3 py-2 text-sm text-slate-700 ring-1 focus:outline-none focus:ring-2 focus:ring-brand-500",
+    "w-full rounded-lg bg-white px-3 py-2 text-sm text-slate-700 ring-1 focus:outline-none focus:ring-2 focus:ring-caramel-500",
     error ? "ring-rose-300" : "ring-slate-200"
   );
 }
@@ -273,7 +273,7 @@ export default function ReservationsPage() {
                   className={cn(
                     "flex w-full items-center gap-2.5 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                     viewMode === item.mode
-                      ? "bg-brand-50 text-brand-700"
+                      ? "bg-caramel-400/10 text-caramel-600"
                       : "text-slate-600 hover:bg-slate-50"
                   )}
                 >
@@ -289,7 +289,7 @@ export default function ReservationsPage() {
             <div className="flex items-center justify-between">
               <p className="text-sm font-bold text-slate-700">{t("res.quickFilter")}</p>
               {hasActiveFilter && (
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-[10px] font-bold text-white">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-caramel-500 text-[10px] font-bold text-white">
                   {activeFilterCount}
                 </span>
               )}
@@ -331,7 +331,7 @@ export default function ReservationsPage() {
                     onClick={() => setPeriod(p.value)}
                     className={cn(
                       "flex-1 py-1.5 text-xs font-bold transition-colors",
-                      period === p.value ? "bg-brand-600 text-white" : "text-slate-500 hover:bg-slate-50"
+                      period === p.value ? "bg-caramel-500 text-white" : "text-slate-500 hover:bg-slate-50"
                     )}
                   >
                     {p.label}
@@ -348,7 +348,7 @@ export default function ReservationsPage() {
               disabled={!hasActiveFilter}
               className={cn(
                 "flex w-full items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-medium ring-1 ring-slate-200 transition-colors",
-                hasActiveFilter ? "text-brand-600 hover:bg-brand-50" : "cursor-not-allowed text-slate-300"
+                hasActiveFilter ? "text-caramel-500 hover:bg-caramel-400/10" : "cursor-not-allowed text-slate-300"
               )}
             >
               <RotateCcw className="h-3.5 w-3.5" /> {t("res.clearFilter")}
@@ -381,7 +381,7 @@ export default function ReservationsPage() {
                   <button className="inline-flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-500 ring-1 ring-slate-200 hover:bg-slate-50">
                     <Filter className="h-3.5 w-3.5" /> {t("common.filter")}
                     {hasActiveFilter && (
-                      <span className="ml-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 text-[9px] font-bold text-white">{activeFilterCount}</span>
+                      <span className="ml-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-caramel-500 text-[9px] font-bold text-white">{activeFilterCount}</span>
                     )}
                   </button>
                   <Button onClick={() => setViewMode("new")} className="px-3 py-1.5 text-xs">
@@ -394,7 +394,7 @@ export default function ReservationsPage() {
                 <div className="flex flex-col items-center justify-center py-20 text-slate-400">
                   <Car className="mb-3 h-10 w-10 opacity-30" />
                   <p className="text-sm font-medium">該当する予約がありません</p>
-                  <button onClick={clearFilters} className="mt-3 text-xs text-brand-600 hover:underline">フィルターをクリア</button>
+                  <button onClick={clearFilters} className="mt-3 text-xs text-caramel-500 hover:underline">フィルターをクリア</button>
                 </div>
               ) : (
                 <>
@@ -434,7 +434,7 @@ export default function ReservationsPage() {
               {allFilteredBars.length === 0 ? (
                 <div className="py-16 text-center text-slate-400">
                   <p className="text-sm">該当する予約がありません</p>
-                  <button onClick={clearFilters} className="mt-2 text-xs text-brand-600 hover:underline">フィルターをクリア</button>
+                  <button onClick={clearFilters} className="mt-2 text-xs text-caramel-500 hover:underline">フィルターをクリア</button>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
@@ -461,7 +461,7 @@ export default function ReservationsPage() {
                             onClick={() => setSelectedId(b.id)}
                             className={cn(
                               "cursor-pointer border-b border-slate-50 transition-colors hover:bg-slate-50",
-                              selectedId === b.id && "bg-brand-50"
+                              selectedId === b.id && "bg-caramel-400/10"
                             )}
                           >
                             <td className="py-2.5 pr-4 font-mono text-xs text-slate-400">{resId(b)}</td>
@@ -519,7 +519,7 @@ export default function ReservationsPage() {
                             value={type}
                             checked={newForm.customerType === type}
                             onChange={() => setNewForm((f) => ({ ...f, customerType: type, companyName: "" }))}
-                            className="accent-brand-600"
+                            className="accent-caramel-500"
                           />
                           {type === "individual" ? "個人" : "法人"}
                         </label>
@@ -597,7 +597,7 @@ export default function ReservationsPage() {
                     <div className="flex flex-wrap gap-4">
                       {(["childSeat", "etc", "navigation"] as const).map((opt) => (
                         <label key={opt} className="flex cursor-pointer items-center gap-2 text-sm text-slate-600">
-                          <input type="checkbox" checked={newForm[opt]} onChange={(e) => setNewForm((f) => ({ ...f, [opt]: e.target.checked }))} className="accent-brand-600" />
+                          <input type="checkbox" checked={newForm[opt]} onChange={(e) => setNewForm((f) => ({ ...f, [opt]: e.target.checked }))} className="accent-caramel-500" />
                           {{ childSeat: "チャイルドシート", etc: "ETC車載器", navigation: "カーナビ（ポータブル）" }[opt]}
                         </label>
                       ))}
@@ -869,7 +869,7 @@ export default function ReservationsPage() {
                 </div>
                 <div className="flex justify-between border-t border-slate-100 pt-1.5">
                   <dt className="font-bold text-slate-600">{t("summary.total")}</dt>
-                  <dd className="font-extrabold text-brand-600">{jpy(total)}</dd>
+                  <dd className="font-extrabold text-caramel-500">{jpy(total)}</dd>
                 </div>
               </dl>
             </div>

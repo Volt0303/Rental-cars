@@ -17,7 +17,7 @@ export function PlaceholderPage({
     <AdminShell title={t(titleKey)}>
       <div className="mx-auto max-w-2xl py-10">
         <Card className="p-8 text-center">
-          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
+          <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-caramel-400/10 text-caramel-500">
             <Hammer className="h-7 w-7" />
           </span>
           <h2 className="mt-5 text-xl font-extrabold text-slate-800">{t("ph.title")}</h2>

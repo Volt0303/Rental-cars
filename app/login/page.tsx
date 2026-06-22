@@ -59,16 +59,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-beige-100">
 
       {/* ── Left branding panel (desktop only) ── */}
-      <div className="hidden flex-col justify-between bg-navy-900 p-10 lg:flex lg:w-[420px] lg:shrink-0">
+      <div className="hidden flex-col justify-between bg-warm-900 p-10 lg:flex lg:w-[420px] lg:shrink-0">
         <CompassCarLogo variant="dark" />
 
         <div>
           <h2 className="mb-4 text-3xl font-extrabold leading-tight text-white">
             外国人のお客様に<br />寄り添う<br />
-            <span className="text-brand-400">レンタカーサービス</span>
+            <span className="text-caramel-300">レンタカーサービス</span>
           </h2>
           <p className="mb-8 text-sm leading-relaxed text-slate-400">
             多言語対応スタッフが空港でお出迎え。
@@ -80,7 +80,7 @@ export default function LoginPage() {
               "お客様ログインで車両検索・オンライン予約",
             ].map((t) => (
               <li key={t} className="flex items-start gap-2.5 text-sm text-slate-300">
-                <Shield className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
+                <Shield className="mt-0.5 h-4 w-4 shrink-0 text-caramel-300" />
                 {t}
               </li>
             ))}
@@ -97,7 +97,7 @@ export default function LoginPage() {
 
         {/* Mobile logo */}
         <div className="mb-8 lg:hidden">
-          <div className="inline-flex items-center justify-center rounded-2xl bg-navy-900 p-3">
+          <div className="inline-flex items-center justify-center rounded-2xl bg-warm-900 p-3">
             <CompassCarLogo variant="dark" />
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function LoginPage() {
                 placeholder="example@compass-car.jp"
                 required
                 autoComplete="email"
-                className="w-full rounded-lg border-0 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full rounded-lg border-0 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-caramel-500"
               />
             </div>
 
@@ -136,7 +136,7 @@ export default function LoginPage() {
                   placeholder="パスワードを入力"
                   required
                   autoComplete="current-password"
-                  className="w-full rounded-lg border-0 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full rounded-lg border-0 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 shadow-sm ring-1 ring-slate-200 focus:outline-none focus:ring-2 focus:ring-caramel-500"
                 />
                 <button
                   type="button"
@@ -160,7 +160,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand-600 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-caramel-500 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-caramel-600 disabled:opacity-60"
             >
               {loading ? (
                 <><Loader2 className="h-4 w-4 animate-spin" /> ログイン中...</>
@@ -177,7 +177,7 @@ export default function LoginPage() {
                 <div className="w-full border-t border-slate-200" />
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-slate-50 px-3 text-xs text-slate-400">アカウントを選択</span>
+                <span className="bg-beige-100 px-3 text-xs text-slate-400">アカウントを選択</span>
               </div>
             </div>
 
@@ -186,10 +186,10 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => fill("admin")}
-                className="flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-3 py-3 text-left shadow-sm transition hover:border-brand-300 hover:bg-brand-50"
+                className="flex items-center gap-2.5 rounded-xl border border-beige-300 bg-white px-3 py-3 text-left shadow-sm transition hover:border-caramel-300 hover:bg-caramel-400/10"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-100">
-                  <Building2 className="h-4 w-4 text-brand-600" />
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-caramel-400/15">
+                  <Building2 className="h-4 w-4 text-caramel-500" />
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs font-bold text-slate-700">管理者</p>
