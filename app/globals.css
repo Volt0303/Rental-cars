@@ -9,6 +9,24 @@
   --color-brand-500: #2f6df6;
   --color-brand-600: #2563eb;
   --color-brand-700: #1d4ed8;
+  --color-gold-300: #e2c97e;
+  --color-gold-400: #c9a86a;
+  --color-gold-500: #b08d4e;
+
+  /* Beige / warm palette for landing page */
+  --color-beige-50:  #fdfaf6;
+  --color-beige-100: #f7f0e4;
+  --color-beige-200: #ece2d0;
+  --color-beige-300: #ddd0b8;
+  --color-warm-900:  #1c1108;
+  --color-warm-800:  #2e1d0e;
+  --color-warm-700:  #5c3e29;
+  --color-warm-600:  #7d5638;
+  --color-warm-500:  #a07050;
+  --color-caramel-300: #dba96a;
+  --color-caramel-400: #c47830;
+  --color-caramel-500: #a86020;
+  --color-caramel-600: #8c5018;
 
   --font-sans: var(--font-noto-sans-jp), ui-sans-serif, system-ui, sans-serif;
 
@@ -23,8 +41,8 @@
 }
 
 :root {
-  --background: #f4f7fe;
-  --foreground: #1b254b;
+  --background: #f7f0e4;
+  --foreground: #1c1108;
 }
 
 html,
