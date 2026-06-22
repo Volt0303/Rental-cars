@@ -13,7 +13,7 @@ const notoSansJP = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "Rentacar Pro | レンタカー業務管理システム",
   description:
-    "COMPASS_CAR 様向け レンタカー予約・顧客・書類・車両スケジュール管理システム（デモ版）",
+    "COMPASS CAR | レンタカー予約・顧客・書類・車両スケジュール管理システム",
 };
 
 export default function RootLayout({

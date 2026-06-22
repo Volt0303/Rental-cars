@@ -26,6 +26,7 @@ export type Vehicle = {
   available: boolean;
   stockNote?: "last" | null;
   accent: string; // tailwind gradient classes for the thumbnail
+  image?: string; // path to vehicle photo under /public
   store: string;  // which store location this vehicle is based at
 };
 
@@ -46,6 +47,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: null,
     store: "成田空港店",
     accent: "from-slate-200 to-slate-400",
+    image: "/car_sample/COLT-B-01.jpg",
   },
   {
     id: "hiace",
@@ -62,6 +64,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: null,
     store: "羽田空港店",
     accent: "from-zinc-300 to-zinc-500",
+    image: "/car_sample/COLT-B-02.jpg",
   },
   {
     id: "serena",
@@ -78,6 +81,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: "last",
     store: "新宿店",
     accent: "from-sky-200 to-sky-400",
+    image: "/car_sample/COLT-R-02.jpg",
   },
   {
     id: "vclass",
@@ -94,6 +98,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: null,
     store: "渋谷店",
     accent: "from-neutral-300 to-neutral-500",
+    image: "/car_sample/COLT-R-03.jpg",
   },
   {
     id: "modely",
@@ -110,6 +115,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: null,
     store: "横浜店",
     accent: "from-rose-200 to-rose-400",
+    image: "/car_sample/COLT-B-01.jpg",
   },
   {
     id: "prado",
@@ -126,6 +132,7 @@ export const VEHICLES: Vehicle[] = [
     stockNote: null,
     store: "大阪店",
     accent: "from-emerald-200 to-emerald-400",
+    image: "/car_sample/COLT-B-02.jpg",
   },
 ];
 
@@ -276,23 +283,30 @@ export const ADDITIONAL_OPTIONS = [
 
 const _CATALOG_STORES = ["成田空港店","羽田空港店","新宿店","渋谷店","横浜店","大阪店","名古屋店"];
 
+const _CAR_IMAGES = [
+  "/car_sample/COLT-B-01.jpg",
+  "/car_sample/COLT-B-02.jpg",
+  "/car_sample/COLT-R-02.jpg",
+  "/car_sample/COLT-R-03.jpg",
+];
+
 const _CATALOG_TEMPLATES: Omit<Vehicle, "id" | "plate" | "available" | "stockNote" | "recommended" | "store">[] = [
-  { name: "Toyota Alphard",           nameJa: "トヨタ アルファード",               type: "luxury",  seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 24200, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-slate-200 to-slate-400" },
-  { name: "Toyota Hiace Grand Cabin", nameJa: "トヨタ ハイエース グランドキャビン", type: "minivan", seats: 10, transmission: "auto", fuel: "diesel", basePrice2Days: 18700, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-zinc-300 to-zinc-500" },
-  { name: "Nissan Serena",            nameJa: "日産 セレナ",                        type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 16500, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-sky-200 to-sky-400" },
-  { name: "Mercedes-Benz V-Class",    nameJa: "メルセデス・ベンツ Vクラス",         type: "luxury",  seats: 7,  transmission: "auto", fuel: "diesel", basePrice2Days: 35200, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-neutral-300 to-neutral-500" },
-  { name: "Tesla Model Y",            nameJa: "テスラ モデルY",                     type: "suv",     seats: 5,  transmission: "auto", fuel: "ev",     basePrice2Days: 28600, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-rose-200 to-rose-400" },
-  { name: "Land Cruiser Prado",       nameJa: "ランドクルーザー プラド",             type: "suv",     seats: 7,  transmission: "auto", fuel: "diesel", basePrice2Days: 26400, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-emerald-200 to-emerald-400" },
-  { name: "Honda Odyssey",            nameJa: "ホンダ オデッセイ",                  type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 15400, features: ["carNavi","etc","backCamera"],             accent: "from-blue-200 to-blue-400" },
-  { name: "Toyota Vellfire",          nameJa: "トヨタ ヴェルファイア",              type: "luxury",  seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 22000, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-gray-200 to-gray-500" },
-  { name: "Nissan Elgrand",           nameJa: "日産 エルグランド",                  type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 17600, features: ["carNavi","etc","backCamera"],             accent: "from-indigo-200 to-indigo-400" },
-  { name: "Toyota Noah",              nameJa: "トヨタ ノア",                        type: "wagon",   seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 13200, features: ["carNavi","etc","backCamera"],             accent: "from-amber-200 to-amber-400" },
-  { name: "Toyota Voxy",             nameJa: "トヨタ ヴォクシー",                  type: "wagon",   seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 12100, features: ["carNavi","etc","backCamera"],             accent: "from-violet-200 to-violet-400" },
-  { name: "Honda Stepwgn",            nameJa: "ホンダ ステップワゴン",              type: "wagon",   seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 14300, features: ["carNavi","etc","backCamera"],             accent: "from-teal-200 to-teal-400" },
-  { name: "Toyota RAV4",              nameJa: "トヨタ RAV4",                        type: "suv",     seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days: 19800, features: ["carNavi","etc","backCamera"],             accent: "from-orange-200 to-orange-400" },
-  { name: "Subaru Forester",          nameJa: "スバル フォレスター",                type: "suv",     seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days: 17600, features: ["carNavi","etc","backCamera"],             accent: "from-cyan-200 to-cyan-400" },
-  { name: "Toyota Corolla",           nameJa: "トヨタ カローラ",                    type: "compact", seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days:  9900, features: ["carNavi","etc","backCamera"],             accent: "from-red-200 to-red-400" },
-  { name: "Honda Fit",                nameJa: "ホンダ フィット",                    type: "compact", seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days:  8800, features: ["carNavi","backCamera"],                  accent: "from-pink-200 to-pink-400" },
+  { name: "Toyota Alphard",           nameJa: "トヨタ アルファード",               type: "luxury",  seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 24200, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-slate-200 to-slate-400", image: _CAR_IMAGES[0] },
+  { name: "Toyota Hiace Grand Cabin", nameJa: "トヨタ ハイエース グランドキャビン", type: "minivan", seats: 10, transmission: "auto", fuel: "diesel", basePrice2Days: 18700, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-zinc-300 to-zinc-500",   image: _CAR_IMAGES[1] },
+  { name: "Nissan Serena",            nameJa: "日産 セレナ",                        type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 16500, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-sky-200 to-sky-400",     image: _CAR_IMAGES[2] },
+  { name: "Mercedes-Benz V-Class",    nameJa: "メルセデス・ベンツ Vクラス",         type: "luxury",  seats: 7,  transmission: "auto", fuel: "diesel", basePrice2Days: 35200, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-neutral-300 to-neutral-500", image: _CAR_IMAGES[3] },
+  { name: "Tesla Model Y",            nameJa: "テスラ モデルY",                     type: "suv",     seats: 5,  transmission: "auto", fuel: "ev",     basePrice2Days: 28600, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-rose-200 to-rose-400",   image: _CAR_IMAGES[0] },
+  { name: "Land Cruiser Prado",       nameJa: "ランドクルーザー プラド",             type: "suv",     seats: 7,  transmission: "auto", fuel: "diesel", basePrice2Days: 26400, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-emerald-200 to-emerald-400", image: _CAR_IMAGES[1] },
+  { name: "Honda Odyssey",            nameJa: "ホンダ オデッセイ",                  type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 15400, features: ["carNavi","etc","backCamera"],             accent: "from-blue-200 to-blue-400",  image: _CAR_IMAGES[2] },
+  { name: "Toyota Vellfire",          nameJa: "トヨタ ヴェルファイア",              type: "luxury",  seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 22000, features: ["carNavi","etc","backCamera","bluetooth"], accent: "from-gray-200 to-gray-500",   image: _CAR_IMAGES[3] },
+  { name: "Nissan Elgrand",           nameJa: "日産 エルグランド",                  type: "minivan", seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 17600, features: ["carNavi","etc","backCamera"],             accent: "from-indigo-200 to-indigo-400", image: _CAR_IMAGES[0] },
+  { name: "Toyota Noah",              nameJa: "トヨタ ノア",                        type: "wagon",   seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 13200, features: ["carNavi","etc","backCamera"],             accent: "from-amber-200 to-amber-400", image: _CAR_IMAGES[1] },
+  { name: "Toyota Voxy",              nameJa: "トヨタ ヴォクシー",                  type: "wagon",   seats: 7,  transmission: "auto", fuel: "gas",    basePrice2Days: 12100, features: ["carNavi","etc","backCamera"],             accent: "from-violet-200 to-violet-400", image: _CAR_IMAGES[2] },
+  { name: "Honda Stepwgn",            nameJa: "ホンダ ステップワゴン",              type: "wagon",   seats: 8,  transmission: "auto", fuel: "gas",    basePrice2Days: 14300, features: ["carNavi","etc","backCamera"],             accent: "from-teal-200 to-teal-400",  image: _CAR_IMAGES[3] },
+  { name: "Toyota RAV4",              nameJa: "トヨタ RAV4",                        type: "suv",     seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days: 19800, features: ["carNavi","etc","backCamera"],             accent: "from-orange-200 to-orange-400", image: _CAR_IMAGES[0] },
+  { name: "Subaru Forester",          nameJa: "スバル フォレスター",                type: "suv",     seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days: 17600, features: ["carNavi","etc","backCamera"],             accent: "from-cyan-200 to-cyan-400",  image: _CAR_IMAGES[1] },
+  { name: "Toyota Corolla",           nameJa: "トヨタ カローラ",                    type: "compact", seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days:  9900, features: ["carNavi","etc","backCamera"],             accent: "from-red-200 to-red-400",    image: _CAR_IMAGES[2] },
+  { name: "Honda Fit",                nameJa: "ホンダ フィット",                    type: "compact", seats: 5,  transmission: "auto", fuel: "gas",    basePrice2Days:  8800, features: ["carNavi","backCamera"],                  accent: "from-pink-200 to-pink-400",  image: _CAR_IMAGES[3] },
 ];
 
 function _generateCatalog(): Vehicle[] {

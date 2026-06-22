@@ -119,7 +119,6 @@ export default function ConfirmPage() {
                 {t("confirm.submit")}
               </Button>
             </div>
-            <p className="text-center text-xs text-slate-400">{t("confirm.demoNote")}</p>
           </div>
 
           <div className="lg:sticky lg:top-20 lg:self-start">

@@ -58,7 +58,7 @@ export default function OptionsPage() {
           <div className="space-y-5">
             {/* Vehicle banner */}
             <Card className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center">
-              <CarThumb accent={b.vehicle.accent} className="h-24 w-full shrink-0 sm:w-40" iconClassName="h-10 w-10" />
+              <CarThumb accent={b.vehicle.accent} src={b.vehicle.image} className="h-24 w-full shrink-0 sm:w-40" iconClassName="h-10 w-10" />
               <div className="flex-1">
                 <h2 className="text-lg font-bold text-slate-800">{b.vehicle.name}</h2>
                 <p className="text-sm text-slate-500">{b.vehicle.nameJa}</p>

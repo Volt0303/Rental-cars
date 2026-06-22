@@ -61,7 +61,7 @@ export function BookingSummary({
         </div>
 
         <div className="flex gap-3 px-5 py-4">
-          <CarThumb accent={b.vehicle.accent} className="h-14 w-20 shrink-0" iconClassName="h-7 w-7" />
+          <CarThumb accent={b.vehicle.accent} src={b.vehicle.image} className="h-14 w-20 shrink-0" iconClassName="h-7 w-7" />
           <div className="min-w-0">
             <p className="truncate font-bold text-slate-800">{b.vehicle.name}</p>
             <p className="truncate text-xs text-slate-500">{b.vehicle.nameJa}</p>

@@ -314,7 +314,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         </span>
       )}
       <div className="flex flex-col gap-4 sm:flex-row">
-        <CarThumb accent={vehicle.accent} className="h-32 w-full shrink-0 sm:w-48" iconClassName="h-12 w-12" />
+        <CarThumb accent={vehicle.accent} src={vehicle.image} className="h-32 w-full shrink-0 sm:w-48" iconClassName="h-12 w-12" />
 
         <div className="min-w-0 flex-1">
           <h3 className="text-lg font-bold text-slate-800">{vehicle.name}</h3>

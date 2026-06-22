@@ -31,7 +31,7 @@ const ja: Dict = {
   "brand.tagline.site": "Premium Car Rental Service",
 
   // Landing
-  "landing.badge": "デモ版 / Demo",
+  "landing.badge": "外国人向けレンタカー専門",
   "landing.title": "レンタカー業務管理システム",
   "landing.subtitle":
     "お問い合わせから予約・契約書類・お客様対応までを一つの情報でつなぐ、多言語対応の業務システムです。",
@@ -40,8 +40,7 @@ const ja: Dict = {
   "landing.admin.title": "管理システム",
   "landing.admin.desc": "ダッシュボード・予約スケジュール・顧客・書類自動生成",
   "landing.enter": "開く",
-  "landing.note":
-    "※ 本デモはフロントエンドのみの試作版です。実際のデータ保存・送信は行いません。",
+  "landing.note": "",
 
   // Common
   "common.next": "次へ",
@@ -210,7 +209,7 @@ const ja: Dict = {
   "confirm.options": "オプション",
   "confirm.agree": "利用規約・キャンセルポリシーに同意します",
   "confirm.submit": "この内容で予約を確定する",
-  "confirm.demoNote": "※ デモ版のため、実際の予約・決済は行われません。",
+  "confirm.demoNote": "",
 
   // Complete page
   "complete.title": "ご予約ありがとうございます",
@@ -342,7 +341,7 @@ const ja: Dict = {
   "docs.field.license": "免許証番号",
 
   // Placeholder pages
-  "ph.title": "この画面はデモ準備中です",
+  "ph.title": "準備中",
   "ph.desc":
     "本機能は次の開発フェーズで実装予定です。下記は予定している主な機能です。",
 };
@@ -351,7 +350,7 @@ const en: Dict = {
   "brand.tagline.admin": "Car Rental Management System",
   "brand.tagline.site": "Premium Car Rental Service",
 
-  "landing.badge": "Demo",
+  "landing.badge": "Car Rental for Foreign Visitors",
   "landing.title": "Car Rental Operations System",
   "landing.subtitle":
     "A multilingual business system connecting inquiry, reservation, contract documents and customer support with a single source of data.",
@@ -360,8 +359,7 @@ const en: Dict = {
   "landing.admin.title": "Management System",
   "landing.admin.desc": "Dashboard, reservation schedule, customers and document generation",
   "landing.enter": "Open",
-  "landing.note":
-    "* This is a front-end prototype. No data is actually stored or sent.",
+  "landing.note": "",
 
   "common.next": "Next",
   "common.back": "Back",
@@ -521,7 +519,7 @@ const en: Dict = {
   "confirm.options": "Options",
   "confirm.agree": "I agree to the terms and cancellation policy",
   "confirm.submit": "Confirm this booking",
-  "confirm.demoNote": "* This is a demo — no real booking or payment is made.",
+  "confirm.demoNote": "",
 
   "complete.title": "Thank you for your booking",
   "complete.subtitle": "Your booking has been received. A confirmation email has been sent.",

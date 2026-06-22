@@ -341,9 +341,6 @@ export default function ReservationsPage() {
               {period === "day" && (
                 <p className="mt-1 text-[10px] text-slate-400">5/20（月）の予約を表示中</p>
               )}
-              {period === "month" && (
-                <p className="mt-1 text-[10px] text-slate-400">デモデータは1週間分です</p>
-              )}
             </div>
 
             <button
